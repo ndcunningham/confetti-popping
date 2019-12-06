@@ -1,0 +1,24 @@
+{
+  "name": "confetti-popping",
+  "version": "1.0.0",
+  "main": "public-api.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OhScee/confetti-popping.git"
+  },
+  "keywords": [
+    "angular",
+    "confetti"
+  ],
+  "author": "OhScee",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/OhScee/confetti-popping/issues"
+  },
+  "homepage": "https://github.com/OhScee/confetti-popping#readme",
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "canvas-confetti": "^0.4.2"
+  }
+}
