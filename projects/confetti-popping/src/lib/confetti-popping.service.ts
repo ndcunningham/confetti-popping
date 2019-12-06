@@ -2,33 +2,11 @@ import { Injectable } from '@angular/core';
 import { Options } from 'canvas-confetti';
 import * as confetti from 'canvas-confetti';
 
-// huge heckin work around to get a cancel-able timeout
-// -_-"
-function timeout(ms) {
-  let endTimer: Function, timerId: number;
+@Injectable({
+  providedIn: 'root'
+})
+export class ConfettiPoppingService {
 
-  class Timer extends Promise<any> {
-    isCanceled = false;
-
-    constructor(fn) {
-      super(fn);
-    }
-
-    cancel() {
-      endTimer('timer cancelled');
-      clearTimeout(timerId);
-      this.isCanceled = true;
-    }
-  }
-
-  return new Timer(resolve => {
-    endTimer = resolve;
-    timerId = setTimeout(endTimer, ms);
-  });
-}
-
-@Injectable()
-export class ConfettiService {
   canvasStyles = `
   position: fixed;
   top:0;
@@ -47,7 +25,7 @@ export class ConfettiService {
   private confettiActive = false;
 
   private conffetiTiming: Array<number> = [750, 950, 1200];
-  private colors: [Array<string>] = [
+  private colors: Array<Array<string>> = [
     ['#FF443A', '#7FD3FF', '#FFD646', '#B872FF'],
     // ['#FFA447', '#6586FF', '#40F383', '#FFDC61'],
     ['#31ECF2', '#FF443A', '#FF5CED', '#FFD646'],
@@ -179,4 +157,29 @@ export class ConfettiService {
 
     return this.canvas;
   }
+}
+
+// huge heckin work around to get a cancel-able timeout
+// -_-"
+function timeout(ms) {
+  let endTimer: Function, timerId: number;
+
+  class Timer extends Promise<any> {
+    isCanceled = false;
+
+    constructor(fn) {
+      super(fn);
+    }
+
+    cancel() {
+      endTimer('timer cancelled');
+      clearTimeout(timerId);
+      this.isCanceled = true;
+    }
+  }
+
+  return new Timer(resolve => {
+    endTimer = resolve;
+    timerId = setTimeout(endTimer, ms);
+  });
 }
